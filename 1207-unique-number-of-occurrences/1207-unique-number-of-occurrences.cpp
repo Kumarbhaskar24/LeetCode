@@ -3,9 +3,9 @@ public:
     bool uniqueOccurrences(vector<int>& arr) {
         map<int,int> m;
         map<int,int> m2;
-        for(int i=0;i<arr.size();i++)
+        for(auto it:arr)
         {
-            m[arr[i]]++;
+            m[it]++;
         }
         
         for(auto it:m)
