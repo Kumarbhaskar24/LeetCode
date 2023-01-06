@@ -1,25 +1,15 @@
 class Solution {
 public:
     int maxIceCream(vector<int>& costs, int coins) {
-        int sum=0;
-        int cnt=0;
-        map<long long,long long> m;
-        for(auto it:costs)
-            m[it]++;
-        for(auto it:m)
-        {
-          //  cout<<it.first<<" "<<it.second<<endl;
-            if(it.first*it.second>coins)
-            {
-                cnt+=coins/it.first;
-                return cnt;
-            }
-            else{
-                cnt+=it.second;
-                coins-=it.first*it.second;
-            }
+        vector<int> map(100001, 0);
+        int i, res=0;
+        for(auto c: costs)
+            map[c]++;
+        for(i=1; i<=min(100000, coins); i++){
+            int canBuy = min(map[i], coins/i);
+            coins-=canBuy*i;
+            res+=canBuy;
         }
- 
-        return cnt;
+        return res;
     }
 };
