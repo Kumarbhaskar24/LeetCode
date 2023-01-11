@@ -11,9 +11,7 @@ public:
             {
                 mini=prices[i];
             }
-            p=prices[i]-mini;
-            if(profit<p)
-                profit=p;
+          profit=max(profit,prices[i]-mini);
         }
   
     return profit;
