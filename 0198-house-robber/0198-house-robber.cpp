@@ -1,22 +1,13 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-    int a = 0;
-    int b = 0;
-    int n=nums.size();
-    for (int i=0; i<n; i++)
-    {
-        if (i%2==0)
-        {
-            a = max(a+nums[i], b);
+        if(nums.size()==1)return nums[0];
+        vector<int>dp(nums.size());
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
+        for(int i=2;i<nums.size();i++){
+            dp[i]=max(dp[i-1],dp[i-2]+nums[i]);
         }
-        else
-        {
-            b = max(a, b+nums[i]);
-        }
-    }
-    
-    return max(a, b);      
-        
+        return dp[nums.size()-1];
     }
 };
