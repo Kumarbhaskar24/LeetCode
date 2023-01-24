@@ -1,28 +1,24 @@
 class Solution {
 public:
-    
-    bool kl(vector<vector<int>>& r,vector<int> &dp,int s)
-    {
 
-        for(int i=s;i<r.size();i++)
-        {
-            if(dp[i]==-1)
+    void dfs(vector<vector<int>> &graph, int s, vector<bool> &vis){
+        vis[s] = true;
+        for(int i = 0; i < graph[s].size(); i++){
+            if(!vis[graph[s][i]]){
+                dfs(graph, graph[s][i], vis);
+            }
+        }
+    }
+
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int i, n=rooms.size();
+        vector<bool> vis(n, false);
+        dfs(rooms, 0, vis);
+        for(i = 0; i < n; i++){
+            if(!vis[i]){
                 return false;
-            for(int j=0;j<r[i].size();j++)
-            {
-                if(dp[r[i][j]]==-1)
-                {
-                     dp[r[i][j]]=1;
-                    kl(r,dp,r[i][j]);
-                }                
             }
         }
         return true;
-    }
-    
-    bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        vector<int> dp(rooms.size()+1,-1);
-        dp[0]=0;
-        return kl(rooms,dp,0);
     }
 };
