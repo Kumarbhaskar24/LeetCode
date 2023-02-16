@@ -1,36 +1,35 @@
 class Solution {
 public:
-
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> myvec;
         sort(nums.begin(),nums.end());
-        if(nums.size()<=2)
-            return myvec;
-        for(int s=0;s<nums.size()-2;s++)
+        vector<vector<int>> ans;  
+        for(int i=0;i<nums.size()-1;i++)
         {
-            if(s==0||(s>0 && nums[s]!=nums[s-1]))
+            if(i>0&&nums[i-1]==nums[i])
+                continue;
+            int a=-nums[i];
+            int j=i+1;
+            int k=nums.size()-1;
+            while(j<k)
             {
-                int i=s+1;
-                int j=nums.size()-1;
-                int target=-nums[s];
-               while(i<j)
-               {
-                     if(nums[i]+nums[j]>target)
-                        j--;
-                    else if(nums[i]+nums[j]==target)
-                    {
-                        myvec.push_back({nums[s],nums[i],nums[j]});
-                        while(i<j && nums[j]==nums[j-1]) j--;
-                        while(i<j && nums[i]==nums[i+1]) i++;                        
-                        i++;
-                        j--;
-                    }
-                   else
-                       i++;
+                vector<int> temp;
+                if(nums[j]+nums[k]<a)
+                    j++;
+                else if(nums[j]+nums[k]>a)
+                    k--;
+                else if(nums[j]+nums[k]==a)
+                {
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[j]);
+                    temp.push_back(nums[k]);
+                    ans.push_back(temp);
+                    while(j<k && nums[k]==nums[k-1]) k--;
+                    while(j<k && nums[j]==nums[j+1]) j++;   
+                    j++;
+                    k--;
                 }
             }
         }
-        
-        return myvec;
+        return ans;
     }
 };
