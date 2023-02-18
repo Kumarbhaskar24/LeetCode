@@ -11,27 +11,24 @@
  */
 class Solution {
 public:
-    TreeNode* invertTree(TreeNode* root) {
+    
+    void solve(TreeNode* root)
+    {
         if(root==NULL)
-             return root;
-        if(root->left&&root->right)
+             return;
+        solve(root->left);
+        solve(root->right);
+        if(root->left||root->right)
         {
             TreeNode* temp=root->left;
             root->left=root->right;
             root->right=temp;
         }
-        else if(root->left&&!root->right)
-        {
-            root->right=root->left;
-            root->left=NULL;
-        }
-        else
-        {
-            root->left=root->right;
-            root->right=NULL;
-        }
-        invertTree(root->left);
-        invertTree(root->right);
+        return;
+    }
+    
+    TreeNode* invertTree(TreeNode* root) {
+            solve(root);
             return root;
     }
 };
