@@ -4,7 +4,6 @@ public:
         queue<pair<pair<int,int>,int>> q;
         int n=grid.size();
         int m=grid[0].size();
-        // vector<vector<int>> visit(n,vector<int>(m,0));
         int cnt=0;
         for(int i=0;i<n;i++)
         {
@@ -31,14 +30,10 @@ public:
             {
                 int x=cord[i][0];
                 int y=cord[i][1];
-                if(r+x>=0 && r+x<n && c+y>=0 && c+y<m)
+                if(r+x>=0 && r+x<n && c+y>=0 && c+y<m&&grid[r+x][c+y]==1)
                 {
-                    if(grid[r+x][c+y]==1)
-                    {
                     q.push({{r+x,c+y},t+1});
                     grid[r+x][c+y]=2;
-                    }
-
                 }
             }  
         }
@@ -47,8 +42,7 @@ public:
             for(int j=0;j<m;j++)
             {
                 if(grid[i][j]==1)
-                    return -1;
-                
+                    return -1;  
             }        
         }
         return temp;
