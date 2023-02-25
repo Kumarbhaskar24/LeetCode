@@ -5,7 +5,7 @@ public:
         long long maxi=INT_MIN;
         long long p=0;
         long long profit=0;
-        for(long long i=0;i<prices.size();i++)
+     for(long long i=0;i<prices.size();i++)
         {
             if(prices[i]<mini)
             {
@@ -13,7 +13,6 @@ public:
             }
           profit=max(profit,prices[i]-mini);
         }
-  
     return profit;
     }
 };
