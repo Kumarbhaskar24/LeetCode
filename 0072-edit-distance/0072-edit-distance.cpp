@@ -9,10 +9,11 @@ public:
             return i+1;
         else if(j>=0&&i<0) 
             return j+1;
-        if(word1[i]==word2[j])
-            return dp[i][j]=solve(word1,word2,i-1,j-1,dp);
         if(dp[i][j]!=-1)
             return dp[i][j];
+        if(word1[i]==word2[j])
+            return dp[i][j]=solve(word1,word2,i-1,j-1,dp);
+
         return dp[i][j]= min(solve(word1,word2,i-1,j-1,dp),min(solve(word1,word2,i-1,j,dp),solve(word1,word2,i,j-1,dp)))+1;
     }
     
