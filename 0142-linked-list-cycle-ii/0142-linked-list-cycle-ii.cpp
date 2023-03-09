@@ -24,6 +24,7 @@ public:
                 {
                     slow=slow->next;
                     entry=entry->next;
+                    //cout<<entry->val<<" "<<slow->val<<endl;
                 }
                 return entry;
             }
