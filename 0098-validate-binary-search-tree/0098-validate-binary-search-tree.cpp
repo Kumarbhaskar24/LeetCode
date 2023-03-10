@@ -12,21 +12,23 @@
 class Solution {
 public:
     
-    
-    bool isValidBST(TreeNode* root, TreeNode* min=NULL, TreeNode* max=NULL) {
-   if (!root)
-   {
-       return true;
-   }
-    if (min != NULL && root->val <= min->val)
+    vector<int> ans;
+    void inorder(TreeNode* root)
     {
-        return false;
+        if(root==NULL)
+            return;
+        inorder(root->left);
+        ans.push_back(root->val);
+        inorder(root->right);
+        return;
     }
-    if (max != NULL && root->val >= max->val)
-    {
-        return false;
+    bool isValidBST(TreeNode* root) {
+        inorder(root);
+        if(ans.size()<=1)
+            return true;
+        for(int i=1;i<ans.size();i++)
+            if(ans[i]<=ans[i-1])
+                return false;
+        return true;
     }
-    return isValidBST(root->left, min, root) && isValidBST(root->right, root, max);
-    }
-        
 };
