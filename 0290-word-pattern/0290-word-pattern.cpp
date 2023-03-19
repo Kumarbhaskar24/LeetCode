@@ -24,7 +24,6 @@ public:
                 m[pattern[i]]=str;
             j++;
         }
-        //cout<<cnt;
         if(pattern.size()!=cnt||j<s.size())
             return false;
         for(auto it:m)
