@@ -18,8 +18,29 @@ public:
     }
     
     
+    int solve_BottomUP(vector<vector<int>> &nums)
+    {
+        vector<vector<int>> dp(nums.size(),vector<int>(nums[0].size(),nums[0][0]));
+        int m=nums.size();
+        int n=nums[0].size();
+        for(int i=1;i<m;i++)
+            dp[i][0]=dp[i-1][0]+nums[i][0];
+        for(int j=1;j<n;j++)
+            dp[0][j]=dp[0][j-1]+nums[0][j];
+        for(int i=1;i<m;i++)
+        {
+            for(int j=1;j<n;j++)
+            {
+                dp[i][j]=min(dp[i-1][j],dp[i][j-1])+nums[i][j];
+            }
+        }
+        return dp[m-1][n-1];
+    }
+    
+    
     int minPathSum(vector<vector<int>>& grid) {
-        vector<vector<int>> dp(grid.size(),vector<int> (grid[0].size(),-1));
-        return solve(grid,0,0,0,dp);
+        //vector<vector<int>> dp(grid.size(),vector<int> (grid[0].size(),-1));
+        //return solve(grid,0,0,0,dp);
+        return solve_BottomUP(grid);
     }
 };
