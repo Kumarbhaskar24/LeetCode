@@ -17,6 +17,22 @@ public:
     }
     
     int search(vector<int>& nums, int target) {
-        return solve(nums,target,0,nums.size()-1);
+       // return solve(nums,target,0,nums.size()-1);
+        
+        int start=0;
+        int end=nums.size()-1;
+        while(start<=end)
+        {
+            int mid=(start+end)/2;
+            if(nums[mid]==target)
+                return mid;
+            if(target>nums[mid])
+            {
+                start=mid+1;
+            }
+            else if(target<nums[mid])
+                end=mid-1;
+        }
+        return -1;
     }
 };
