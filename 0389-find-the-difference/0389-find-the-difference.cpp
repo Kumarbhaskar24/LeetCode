@@ -1,9 +1,9 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        char ret ='\0';
-        for (auto &c: s) ret^=c;
-        for (auto &c: t) ret^=c;
-        return ret;
+        char ans ='\0';
+        for (auto &it: s) ans^=it;
+        for (auto &it: t) ans^=it;
+        return ans;
     }
 };
