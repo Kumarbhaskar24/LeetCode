@@ -28,14 +28,14 @@ public:
         int n=grid.size();
         int m=grid[0].size();
         int ans=0;
-        for(int i=0;i<n;i++)
-            for(int j=0;j<m;j++)
-                if(i*j==0||i==n-1||j==m-1)
-                    if(grid[i][j]=='1')
-                    { 
-                        ans++;
-                        dfs(i,j,n,m,grid);
-                    }
+        // for(int i=0;i<n;i++)
+        //     for(int j=0;j<m;j++)
+        //         if(i*j==0||i==n-1||j==m-1)
+        //             if(grid[i][j]=='1')
+        //             { 
+        //                 ans++;
+        //                 dfs(i,j,n,m,grid);
+        //             }
 
         for(int i=0;i<n;i++)
             for(int j=0;j<m;j++)
