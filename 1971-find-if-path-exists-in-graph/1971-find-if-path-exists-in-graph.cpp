@@ -27,7 +27,9 @@ public:
                     vis[temp[i]]=true;
                     
                 }
-                }  
+                }
+            if(vis[destination])
+                return true;
         }
         return vis[destination];
     }
