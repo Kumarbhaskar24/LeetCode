@@ -1,19 +1,14 @@
 class Solution {
 public:
     int arraySign(vector<int>& nums) {
-        int neg=0;
-        int cnt=0;
+        int temp=1;
         for(auto it:nums)
         {
             if(it<0)
-                neg++;
+                temp^=1;
             if(it==0)
-                cnt++;
+                return 0;
         }
-        if(cnt>0)
-            return 0;
-        else if(neg%2==0)
-            return 1;        
-        return -1;
+        return temp==0?-1:1;
     }
 };
