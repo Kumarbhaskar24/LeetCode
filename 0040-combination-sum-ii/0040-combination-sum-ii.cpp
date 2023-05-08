@@ -1,12 +1,18 @@
 class Solution {
 public:
-    vector<vector<int>> ans;
-    vector<vector<int>> solve(vector<int>& nums,int target,int i,vector<int> &temp)
+    
+    
+    void helper(int i,int target,int sum,vector<int> & nums,vector<vector<int>> &ans,vector<int> &temp)
     {
-        if(target==0)
+        if(sum>target)
+            return ;
+        if(sum==target)
         {
-            ans.push_back(temp);
-            return ans;
+            // vector<vector<int>>:: iterator it;
+            // it=find(ans.begin(),ans.end(),temp);
+            // if(it==ans.end())
+                ans.push_back(temp);
+            return;
         }
         for(int j=i;j<nums.size();j++)
         {
@@ -14,15 +20,15 @@ public:
             if(nums[j]>target)
                 break;
             temp.push_back(nums[j]);
-            solve(nums,target-nums[j],j+1,temp);
+            helper(j+1,target,sum+nums[j],nums,ans,temp);
             temp.pop_back();
         }
-        return ans;
     }
-    
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
         vector<int> temp;
         sort(candidates.begin(),candidates.end());
-        return solve(candidates,target,0,temp);
+        helper(0,target,0,candidates,ans,temp);
+        return ans;
     }
 };
