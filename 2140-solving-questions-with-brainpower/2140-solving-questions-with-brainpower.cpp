@@ -14,8 +14,16 @@ public:
         return dp[i]=ans;
         
     }
-    long long mostPoints(vector<vector<int>>& questions) {
-        vector<long long> dp(questions.size()+1,-1);
-        return helper(0,questions,dp);   
+    long long mostPoints(vector<vector<int>>& nums) {
+        vector<long long> dp(nums.size()+1,0);
+        int n=nums.size();
+        for(int i=n-1;i>=0;i--)
+        {
+            int points=nums[i][0],steps=nums[i][1];
+            dp[i]=max(points+dp[min(i+steps+1,n)],dp[i+1]);
+        }
+        return dp[0];
+        
+        //return helper(0,questions,dp);   
     }
 };
