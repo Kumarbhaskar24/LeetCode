@@ -1,40 +1,40 @@
 class Solution {
 public:
-    bool dfs(int s,vector<vector<int>>& nums,vector<vector<int>> &adj,vector<bool> &vis,vector<bool> &dfsvis)
+    
+    bool iscycle(int i,vector<vector<int>>& nums,vector<bool> &vis,vector<bool> &dfsvis,vector<vector<int>> &adj)
     {
-        vis[s]=true;
-        dfsvis[s]=true;
-         vector<int> data=adj[s];
+        vis[i]=true;
+        dfsvis[i]=true;
+        vector<int> data=adj[i];
         for(auto it:data)
         {
             if(!vis[it])
             {
-                if(dfs(it,nums,adj,vis,dfsvis))
+                if(iscycle(it,nums,vis,dfsvis,adj))
                     return true;
             }
-            if(vis[s]&&dfsvis[it])
-                return true;
+            else if(dfsvis[it]&&vis[it])
+                return true;           
         }
-        dfsvis[s]=false;
+        dfsvis[i]=false;
         return false;
+        
     }
     
-    bool canFinish(int numCourses, vector<vector<int>>& nums) {
-        int n=numCourses;
-        vector<bool> vis(n,false),dfsvis(n,false);
+    
+    bool canFinish(int n, vector<vector<int>>& prerequisites) {
+        vector<bool> vis(n,false);
+        vector<bool> dfsvis(n,false);
         vector<vector<int>> adj(n);
-        for (auto x : nums) {
-            int a = x[0];
-            int b = x[1];
-            adj[a].push_back(b);
+        for(auto it:prerequisites)
+        {
+            adj[it[0]].push_back(it[1]);
         }
         for(int i=0;i<n;i++)
         {
             if(!vis[i])
-            {
-                 if(dfs(i,nums,adj,vis,dfsvis))
-                     return false;
-            }
+                if(iscycle(i,prerequisites,vis,dfsvis,adj))
+                    return false;
         }
         return true;
     }
