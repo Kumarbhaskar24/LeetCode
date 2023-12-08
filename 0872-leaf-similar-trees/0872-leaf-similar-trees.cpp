@@ -10,32 +10,40 @@
  * };
  */
 class Solution {
-public:    
-    vector<int> helper(TreeNode* root,vector<int> &ans)
-    {
-        if(!root->left&&!root->right)
-        {
-            ans.push_back(root->val);
-            return ans;
+public:
+    vector <int>v;
+    void dfs(TreeNode* root){
+        if (root == NULL){
+            return ;
         }
-        if(root->left)
-            helper(root->left,ans);
-        if(root->right)
-            helper(root->right,ans);
-        return ans;
+        if (root -> left==NULL && root -> right==NULL){
+            v.push_back(root->val);
+            return;
+        }
+        dfs(root->left);
+        dfs(root->right);
     }
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        vector<int> ans1;
-        vector<int> ans2;
-        vector<int> ans3=helper(root1,ans1);
-        vector<int> ans4=helper(root2,ans2);
-        if(ans3.size()!=ans4.size())
-            return false;
-        for(int i=0;i<ans3.size();i++)
-        {
-            if(ans3[i]!=ans4[i])
-                return false;
+        v.clear();
+        vector<int>v1;
+        dfs(root1);
+        for (int i : v){
+            v1.push_back(i);
         }
-        return true;
+        v.clear();
+        vector<int>v2;
+        dfs(root2);
+        for (int j: v){
+              v2.push_back(j);
+        }
+        while (v2.size()==v1.size()){
+            for (int k=0; k<v1.size(); k++){
+               if( v1[k]!=v2[k]){
+                 return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 };
