@@ -1,12 +1,20 @@
 class Solution {
 public:
-    int uniquePaths(int m, int n) {
-        vector<int> cur(n, 1);
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                cur[j] += cur[j - 1];
-            }
+    
+    int helper(int n,int m,int i,int j,vector<vector<int>> &dp)
+    {
+        if(i>=n||j>=m)
+        {
+            return 0;
         }
-        return cur[n - 1];
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        if(i==n-1&&j==m-1)
+            return 1;
+        return dp[i][j]= helper(n,m,i+1,j,dp)+helper(n,m,i,j+1,dp);
+    }
+    int uniquePaths(int m, int n) {
+        vector<vector<int>> dp(n,vector<int>(m,-1));
+        return helper(n,m,0,0,dp);
     }
 };
