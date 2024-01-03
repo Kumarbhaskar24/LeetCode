@@ -1,7 +1,6 @@
 class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
-        map<int,int> m;
         int sol=0;
         int prev=0;
         int ans=0;
