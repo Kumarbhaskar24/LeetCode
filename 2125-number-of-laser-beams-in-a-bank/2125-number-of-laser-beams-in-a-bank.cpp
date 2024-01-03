@@ -2,6 +2,8 @@ class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
         map<int,int> m;
+        int sol=0;
+        int prev=0;
         int ans=0;
         for(auto it:bank)
         {
@@ -13,25 +15,16 @@ public:
                     cnt++;
                 }
             }
-            m[ans]=cnt;
-            ans++;
-        }
-        int sol=0;
-        int prev=0;
-        for(auto it:m)
-        {
-            if(it.second!=0)
+            if(ans==0)
             {
-                if(it.first==0)
-                {
-                    prev=it.second;
-                }
-                else
-                {
-                    sol+=it.second*prev;
-                    prev=it.second;
-                }
+               prev=cnt;
             }
+            else if(cnt!=0)
+            {
+               sol+=cnt*prev;
+               prev=cnt;
+            }
+            ans++;
         }
         return sol;
     }
