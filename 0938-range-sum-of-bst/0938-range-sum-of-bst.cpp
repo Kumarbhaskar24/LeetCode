@@ -11,21 +11,30 @@
  */
 class Solution {
 public:
-    int ans=0;
-    void inorder(TreeNode* root,int low,int high)
-    {
-        if(!root)
-            return ;
-        inorder(root->left,low,high);
-        if(root->val>=low&&root->val<=high)
-        {
-            ans+=root->val;
-        }
-        inorder(root->right,low,high);
-        return ;
-    }
     int rangeSumBST(TreeNode* root, int low, int high) {
-        inorder(root,low,high);
-        return ans;
+        if(!root->left && !root->right)
+        return root->val;
+
+
+        queue<TreeNode*>q;
+        q.push(root);
+
+        int sum = 0;
+        while(!q.empty())
+        {
+            TreeNode* curr = q.front();
+            q.pop();
+            int d = curr->val;
+
+            if(d>=low && d<=high)
+            sum +=d;
+
+            if(curr->left)
+            q.push(curr->left);
+
+            if(curr->right)
+            q.push(curr->right);
+        }
+        return sum;
     }
 };
