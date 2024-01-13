@@ -10,35 +10,50 @@
  * };
  */
 class Solution {
-private:
-    int maxDistance = 0;
-
 public:
+    unordered_map<int, vector<int>> adj;
+
     int amountOfTime(TreeNode* root, int start) {
-        traverse(root, start);
-        return maxDistance;
+        graph_adj(root);
+
+        queue<int> q;
+        q.push(start);
+
+        unordered_set<int> visited;
+        int time = -1;
+
+        while(!q.empty()){
+            ++time;
+            int size = q.size();
+            for(int i=0; i<size; i++){
+                int cur = q.front();
+                q.pop();
+
+                visited.insert(cur);
+                for(auto it: adj[cur]){
+                    if(!visited.count(it)){
+                        q.push(it);
+                    }
+                }
+
+            }
+        }
+        return time;
     }
 
-    int traverse(TreeNode* root, int start) {
-        int depth = 0;
-        if (root == nullptr) {
-            return depth;
+    void graph_adj(TreeNode* root){
+        if(!root)   return;
+
+        if(root->left){
+            adj[root->val].push_back(root->left->val);
+            adj[root->left->val].push_back(root->val);
+        }
+        if(root->right){
+            adj[root->val].push_back(root->right->val);
+            adj[root->right->val].push_back(root->val);
         }
 
-        int leftDepth = traverse(root->left, start);
-        int rightDepth = traverse(root->right, start);
-
-        if (root->val == start) {
-            maxDistance = max(leftDepth, rightDepth);
-            depth = -1;
-        } else if (leftDepth >= 0 && rightDepth >= 0) {
-            depth = max(leftDepth, rightDepth) + 1;
-        } else {
-            int distance = abs(leftDepth) + abs(rightDepth);
-            maxDistance = max(maxDistance, distance);
-            depth = min(leftDepth, rightDepth) - 1;
-        }
-
-        return depth;
-    }
+        graph_adj(root->left);
+        graph_adj(root->right);
+    }
 };
