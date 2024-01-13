@@ -15,10 +15,9 @@ public:
                     m1.erase(it);
                 }
             }
-        }
-        for(auto it :m1)
-        {
-            ans+=it.second;
+            else{
+                ans++;
+            }
         }
         return ans;
     }
